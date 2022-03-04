@@ -12,7 +12,6 @@ export class StoreDatasetController {
   async create(@Body() dataset: any): Promise<void> {
     try {
       await this.storeDatasetService.execute(dataset.id)
-      console.log({dataset})
     } catch (error) {
       console.error(error)
       throw error

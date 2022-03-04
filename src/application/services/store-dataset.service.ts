@@ -10,15 +10,17 @@ import {
 @Injectable()
 export class StoreDatasetService implements IStoreDatasetUseCase {
   constructor(
+    @Inject('OpenMLGetDatasetProvider')
     private readonly getDatasetProvider: IGetDatasetProvider,
   ) {}
 
   async execute(id: String): Promise<any> {
     try {
-      
       console.log({id})
 
-      await this.getDatasetProvider.getDatasetById(id)
+      const dataset = await this.getDatasetProvider.getDatasetById(id)
+
+      console.log({dataset})
 
       return
     } catch (error) {

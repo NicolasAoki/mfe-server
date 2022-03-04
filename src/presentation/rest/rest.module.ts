@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { StoreDatasetController } from './controllers/store-dataset.controller'
 import { GetDatasetProviderModule } from '@/providers/get-datasets/get-dataset-provider.module'
 import { StoreDatasetService } from '@/application/services/index'
+import { OpenMLGetDatasetProvider } from '@/providers/get-datasets/implementations/openml/get-dataset.provider';
 
 @Module({
   imports: [
@@ -11,7 +12,11 @@ import { StoreDatasetService } from '@/application/services/index'
     StoreDatasetController,
   ],
   providers: [
-    GetDatasetProviderModule,
+    {
+      provide: 'OpenMLGetDatasetProvider',
+      useClass: OpenMLGetDatasetProvider,
+    },
+    // GetDatasetProviderModule,
     StoreDatasetService,
   ],
 })

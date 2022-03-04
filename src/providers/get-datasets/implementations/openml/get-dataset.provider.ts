@@ -7,15 +7,17 @@ import { API_URL } from './config'
 export class OpenMLGetDatasetProvider implements IGetDatasetProvider {
   constructor() {}
   
-  async getDatasetById(id: String): Promise<any[]> {
+  async getDatasetById(id: String): Promise<any> {
     try {
       
       const response = await get({
         url: `${API_URL}/data/${id}`,
       })
 
-      console.log({response})
-      return
+      const dto = {
+        data: response.data.data_set_description
+      }
+      return dto
     } catch (error) {
       console.error(error)
       throw error
