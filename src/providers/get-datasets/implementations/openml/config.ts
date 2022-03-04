@@ -1,0 +1,1 @@
+export const API_URL = 'https://www.openml.org/api/v1/json/'
