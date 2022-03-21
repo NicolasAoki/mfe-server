@@ -7,8 +7,18 @@ import { RemoveDatasetsController } from '@/presentation/rest/controllers/remove
 import {
   StoreDatasetService,
   GetDatasetsService,
-  RemoveDatasetService
+  RemoveDatasetService,
+  DownloadUrlDatasetService,
 } from '@/application/services/index'
+//event-listeners
+import {
+  DatasetInsertedEvent,
+  DatasetDownloadProgressEvent,
+} from '@/domain/events/index'
+//gateway
+import {
+  DatasetsDownloadProgressGateway
+} from '@/presentation/websocket/sockets/datasets-download-progress.gateway'
 
 import { GetDatasetProviderModule } from '@/providers/get-datasets/get-dataset-provider.module'
 import { OpenMLGetDatasetProvider } from '@/providers/get-datasets/implementations/openml/get-dataset.provider';
@@ -23,6 +33,8 @@ import { DatasetsRepository } from '@/infra/mongodb/repositories/datasets.reposi
     StoreDatasetController,
     GetDatasetsController,
     RemoveDatasetsController,
+    DatasetInsertedEvent,
+    DatasetDownloadProgressEvent,
   ],
   providers: [
     {
@@ -36,6 +48,8 @@ import { DatasetsRepository } from '@/infra/mongodb/repositories/datasets.reposi
     StoreDatasetService,
     GetDatasetsService,
     RemoveDatasetService,
+    DownloadUrlDatasetService,
+    DatasetsDownloadProgressGateway,
   ],
 })
 export class RestModule {}

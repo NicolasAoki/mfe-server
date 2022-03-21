@@ -23,7 +23,8 @@ export class DatasetsRepository implements IDatasetsRepositoryPort {
     return datasets
   }
 
-  async saveDataset(dataset: Dataset): Promise<void> {
+  //TODO: replace any by Dataset + _id returned from the insertion
+  async saveDataset(dataset: Dataset): Promise<any> {
     try {
       console.log(`Saving dataset`)
       const datasetDocument = new this.datasetsModel({
@@ -31,13 +32,16 @@ export class DatasetsRepository implements IDatasetsRepositoryPort {
         providerId: dataset.providerId,
         format: dataset.format,
         downloadLink: dataset.downloadLink,
+        downloadProgress: 0,
       })
   
   
       const saved = await datasetDocument.save()
       console.log({saved})
+      return saved
     } catch (error) {
       console.log({error})
+      throw error
     }
   }
 
@@ -46,6 +50,18 @@ export class DatasetsRepository implements IDatasetsRepositoryPort {
       await this.datasetsModel.deleteOne({ _id: new ObjectId(_id) })
     } catch (error) {
       console.log(123,{error}) 
+      throw error
+    }
+  }
+
+  async downloadCompleted(id: string, path: string): Promise<void> {
+    try {
+      await this.datasetsModel.findByIdAndUpdate(id, {
+        downloadProgress: 100,
+        path,
+      })
+    } catch (error) {
+      throw error
     }
   }
 }

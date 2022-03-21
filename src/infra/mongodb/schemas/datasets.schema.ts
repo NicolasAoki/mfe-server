@@ -16,6 +16,13 @@ export class Datasets {
 
   @Prop()
   downloadLink: string;
+
+  @Prop()
+  downloadProgress: number;
+
+  @Prop()
+  path: string;
+  
 }
 
 export const DatasetSchema = SchemaFactory.createForClass(Datasets);

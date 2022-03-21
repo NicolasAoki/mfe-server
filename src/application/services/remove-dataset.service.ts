@@ -11,7 +11,7 @@ export class RemoveDatasetService implements IRemoveDatasetUseCase {
     private readonly datasetRepository: IDatasetsRepositoryPort,
   ) {}
 
-  async execute(_id: String): Promise<void> {
+  async execute(_id: string): Promise<void> {
     try {
       await this.datasetRepository.deleteById(_id)
     } catch (error) {
