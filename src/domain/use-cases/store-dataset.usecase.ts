@@ -1,3 +1,3 @@
 export interface IStoreDatasetUseCase {
-  execute(id: String): Promise<any>;
+  execute(id: string, type: string): Promise<any>;
 }

@@ -5,4 +5,5 @@ export interface IDatasetsRepositoryPort {
   saveDataset(dataset: Dataset): Promise<any>
   deleteById(_id: string): Promise<void>
   downloadCompleted(id: string, path: string): Promise<void>
+  findDuplicateOpenML(id: string): Promise<boolean>
 }

@@ -1,5 +1,9 @@
 
-import { Controller, Post, Body } from '@nestjs/common'
+import {
+  Controller,
+  Post,
+  Body,
+} from '@nestjs/common'
 import { StoreDatasetService } from '../../../application/services/store-dataset.service'
 
 @Controller('/')
@@ -10,11 +14,6 @@ export class StoreDatasetController {
 
   @Post('/store-dataset')
   async create(@Body() dataset: any): Promise<void> {
-    try {
-      await this.storeDatasetService.execute(dataset.id)
-    } catch (error) {
-      console.error(error)
-      throw error
-    }
+    await this.storeDatasetService.execute(dataset.id, dataset.type)
   }
 }

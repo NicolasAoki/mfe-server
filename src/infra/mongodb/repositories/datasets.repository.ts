@@ -26,13 +26,14 @@ export class DatasetsRepository implements IDatasetsRepositoryPort {
   //TODO: replace any by Dataset + _id returned from the insertion
   async saveDataset(dataset: Dataset): Promise<any> {
     try {
-      console.log(`Saving dataset`)
+      console.log('Saving dataset...')
       const datasetDocument = new this.datasetsModel({
         name: dataset.name,
         providerId: dataset.providerId,
         format: dataset.format,
         downloadLink: dataset.downloadLink,
         downloadProgress: 0,
+        type: dataset.type,
       })
   
   
@@ -63,5 +64,10 @@ export class DatasetsRepository implements IDatasetsRepositoryPort {
     } catch (error) {
       throw error
     }
+  }
+
+  async findDuplicateOpenML(id: string): Promise<boolean> {
+    const dataset = await this.datasetsModel.findOne({ providerId: id })
+    return !!dataset
   }
 }

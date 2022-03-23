@@ -22,6 +22,9 @@ export class Datasets {
 
   @Prop()
   path: string;
+
+  @Prop()
+  type: string;
   
 }
 
