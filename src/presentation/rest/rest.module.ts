@@ -9,6 +9,7 @@ import {
   GetDatasetsService,
   RemoveDatasetService,
   DownloadUrlDatasetService,
+  LocalStoreDatasetService,
 } from '@/application/services/index'
 //event-listeners
 import {
@@ -49,6 +50,7 @@ import { DatasetsRepository } from '@/infra/mongodb/repositories/datasets.reposi
     GetDatasetsService,
     RemoveDatasetService,
     DownloadUrlDatasetService,
+    LocalStoreDatasetService,
     DatasetsDownloadProgressGateway,
   ],
 })

@@ -34,6 +34,7 @@ export class DatasetsRepository implements IDatasetsRepositoryPort {
         downloadLink: dataset.downloadLink,
         downloadProgress: 0,
         type: dataset.type,
+        path: dataset.path,
       })
   
   
