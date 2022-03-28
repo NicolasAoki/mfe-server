@@ -17,6 +17,11 @@ export class DatasetsRepository implements IDatasetsRepositoryPort {
     private datasetsModel: Model<DatasetsDocument>,
   ) {}
 
+  async findOneOrThrow(_id: string): Promise<any> {
+    const dataset = await this.datasetsModel.findById({ _id })
+    return dataset
+  }
+
   async findAllOrThrow(): Promise<any> {
     const datasets = await this.datasetsModel.find()
 

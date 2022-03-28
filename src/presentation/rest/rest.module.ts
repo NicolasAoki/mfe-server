@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { StoreDatasetController } from './controllers/store-dataset.controller'
 import { GetDatasetsController } from '@/presentation/rest/controllers/get-datasets.controller'
 import { RemoveDatasetsController } from '@/presentation/rest/controllers/remove-dataset.controller'
+import { PreviewDatasetsController } from '@/presentation/rest/controllers/preview-dataset.controller'
 //services
 import {
   StoreDatasetService,
@@ -10,6 +11,7 @@ import {
   RemoveDatasetService,
   DownloadUrlDatasetService,
   LocalStoreDatasetService,
+  PreviewDatasetService,
 } from '@/application/services/index'
 //event-listeners
 import {
@@ -25,6 +27,7 @@ import { GetDatasetProviderModule } from '@/providers/get-datasets/get-dataset-p
 import { OpenMLGetDatasetProvider } from '@/providers/get-datasets/implementations/openml/get-dataset.provider';
 import { MongooseRepositoriesModule } from '@/infra/mongodb/mongoose.module'
 import { DatasetsRepository } from '@/infra/mongodb/repositories/datasets.repository'
+import { LocalArchiverRepository } from '@/infra/localArchiver/local-archiver.repository';
 @Module({
   imports: [
     MongooseRepositoriesModule,
@@ -34,6 +37,7 @@ import { DatasetsRepository } from '@/infra/mongodb/repositories/datasets.reposi
     StoreDatasetController,
     GetDatasetsController,
     RemoveDatasetsController,
+    PreviewDatasetsController,
     DatasetInsertedEvent,
     DatasetDownloadProgressEvent,
   ],
@@ -46,11 +50,16 @@ import { DatasetsRepository } from '@/infra/mongodb/repositories/datasets.reposi
       provide: 'DatasetsRepository',
       useClass: DatasetsRepository,
     },
+    {
+      provide: 'LocalArchiverRepository',
+      useClass: LocalArchiverRepository,
+    },
     StoreDatasetService,
     GetDatasetsService,
     RemoveDatasetService,
     DownloadUrlDatasetService,
     LocalStoreDatasetService,
+    PreviewDatasetService,
     DatasetsDownloadProgressGateway,
   ],
 })

@@ -4,10 +4,12 @@ import { GetDatasetProviderModule } from '@/providers/get-datasets/get-dataset-p
 import { MongoModule } from '@/infra/mongodb/mongo.module'
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { DatasetsDownloadProgressGateway } from '@/presentation/websocket/sockets/datasets-download-progress.gateway'
+import { LocalArchiverModule } from './infra/localArchiver/local-archiver.module';
 @Module({
   imports: [
     RestModule,
     MongoModule,
+    LocalArchiverModule,
     GetDatasetProviderModule,
     EventEmitterModule.forRoot(),
     DatasetsDownloadProgressGateway,
