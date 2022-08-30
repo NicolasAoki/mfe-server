@@ -1,4 +1,6 @@
 export interface DatasetProps {
+  _id?: string;
+  downloadProgress?: string;
   providerId?: string;
   name: string;
   format: string;
@@ -8,6 +10,8 @@ export interface DatasetProps {
 }
 
 export class Dataset implements DatasetProps {
+  _id?: string;
+  downloadProgress?: string;
   providerId?: string;
   name: string;
   format: string;
@@ -16,6 +20,8 @@ export class Dataset implements DatasetProps {
   path?: string;
 
   constructor(props: DatasetProps) {
+    this._id = props._id;
+    this.downloadProgress = props.downloadProgress;
     this.providerId = props.providerId;
     this.name = props.name;
     this.format = props.format;

@@ -7,7 +7,7 @@ import { API_URL } from './config'
 export class OpenMLGetDatasetProvider implements IGetDatasetProvider {
   constructor() {}
   
-  async getDatasetById(id: String): Promise<any> {
+  async getDatasetById(id: string): Promise<any> {
     try {
       
       const response = await get({

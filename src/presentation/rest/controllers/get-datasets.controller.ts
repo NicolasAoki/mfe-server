@@ -9,7 +9,7 @@ export class GetDatasetsController {
   ) {}
 
   @Get('/get-datasets')
-  async create(): Promise<void> {
+  async create(): Promise<any> {
     try {
       const datasets = await this.getDatasetsService.execute()
       return datasets

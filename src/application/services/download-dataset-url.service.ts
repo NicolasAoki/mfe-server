@@ -9,6 +9,7 @@ import * as fs from 'fs'
 import * as request from 'request'
 import * as progress from 'request-progress'
 import * as path from 'path'
+import axios from 'axios'
 
 @Injectable()
 export class DownloadUrlDatasetService implements IDownloadUrlDatasetUseCase {
@@ -84,6 +85,17 @@ export class DownloadUrlDatasetService implements IDownloadUrlDatasetUseCase {
         .pipe(fs.createWriteStream(`${path}`));
       })
       
+      await axios.post(
+        'http://localhost:5000/save_feature',
+        { datasetId: id, path: `${process.cwd()}/${path}` },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        },
+      );
+
       await this.datasetRepository.downloadCompleted(id, path)
     } catch (error) {
       console.log({error})

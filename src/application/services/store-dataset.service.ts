@@ -51,7 +51,7 @@ export class StoreDatasetService implements IStoreDatasetUseCase {
           payload: { url: savedDataset.downloadLink },
         },
       );
-      
+  
     } catch (error) {
       throw error
     }
